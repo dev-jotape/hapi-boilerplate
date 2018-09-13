@@ -1,0 +1,41 @@
+{
+  "name": "exampleHapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joao Pedro <joao.pedro@onclick.com.br>",
+  "private": true,
+  "scripts": {
+    "dev": "./node_modules/.bin/nodemon index.js",
+    "eslint": "./node_modules/.bin/eslint . --ext .js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "boom": "^7.2.0",
+    "dotenv": "^6.0.0",
+    "good": "^8.1.1",
+    "good-console": "^7.1.0",
+    "good-squeeze": "^5.1.0",
+    "hapi": "^17.5.4",
+    "hapi-boom-decorators": "^4.1.1",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
+    "joi": "^13.6.0",
+    "lodash": "^4.17.11",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.1",
+    "vision": "^5.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "nodemon": "^1.18.4"
+  }
+}
