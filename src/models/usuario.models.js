@@ -16,8 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     senha: {
       type: DataTypes.VIRTUAL,
       set: function (val) {
+        this.salt = 'ABC';
         this.setDataValue('senha', val);
-        this.setDataValue('senha_hash', val);
+        this.setDataValue('senha_hash', this.criptografarSenha(val));
       }
     },
     senha_hash: {
@@ -29,12 +30,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    tableName: 'usuario',
+    tableName: 'usuarios',
     freezeTable: true,
     createdAt: 'data_cadastro',
-    updateAt: 'data_atualizacao',
+    updatedAt: 'data_atualizacao',
     schema: 'public'
   });
+
+  Usuario.prototype.criptografarSenha = function (senha) {
+    const salt = `ARROZ-${this.salt}-${senha}`;
+    return salt;
+  };
 
   return Usuario;
 };

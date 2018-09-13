@@ -9,7 +9,7 @@ module.exports = {
   register: async (server) => {
     const swaggerOptions = {
       schemes: ['http'],
-      host: 'localhost',
+      host: 'localhost:3000',
       info: {
         title: 'Hapi API',
         version: Pack.version,

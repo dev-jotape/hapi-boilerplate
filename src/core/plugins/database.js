@@ -10,7 +10,8 @@ module.exports = {
     const sequelize = new Sequelize(options.database, options.username, options.password, {
       host: options.host,
       port: options.port,
-      dialect: 'postgres'
+      dialect: 'postgres',
+      operatorsAliases: false
     });
 
     const db = {};
