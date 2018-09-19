@@ -1,0 +1,23 @@
+===> load the bootstrap
+  [32m✔[0m [92m1) ===> load server finalized (2 ms)[0m
+Usuário
+  Consulta
+    [31m✖ 2) Deve Retornar uma listagem de usuário[0m
+
+
+Failed tests:
+
+  2) Usuário Consulta Deve Retornar uma listagem de usuário:
+
+      [37;41mactual[0m [30;42mexpected[0m
+
+      [37;41m401[0m[30;42m200[0m
+
+      [33mExpected 401 to equal specified value: 200[0m
+
+[92m      at it (/home/joao.silva/workspace/exampleHapi/src/modules/usuario/public/test/usuario.public.spec.js:11:38[0m
+
+
+[31m1 of 2 tests failed[0m
+Test duration: 688 ms
+

@@ -15,7 +15,7 @@ const create = () => ({
   payload: Joi.object({
     nome: schema.nome.optional(),
     email: schema.email.required(),
-    senha: schema.senha.required(),
+    senha: schema.senha.required()
   }).label('CadastroUsuario')
 });
 

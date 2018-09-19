@@ -25,6 +25,8 @@ const start = async () => {
     await corePlugins(server);
     await routePlugins(server);
 
+    if(process.env.NODE_ENV === 'test') return server;
+
     await server.start();
     console.log(`Server running at: ${server.info.uri}`);
   } catch (err) {
@@ -51,7 +53,8 @@ const corePlugins = async (server) => {
       {
         plugin: require('./plugins/database'),
         options: getDatabase()
-      }
+      },
+      { plugin: require('./plugins/auth') }
     ]));
 
     return await Promise.all(pluginsPromise);

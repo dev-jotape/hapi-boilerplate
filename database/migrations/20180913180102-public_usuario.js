@@ -18,10 +18,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      salt: {
-        type: Sequelize.STRING(4096),
-        allowNull: false
-      },
       data_cadastro: {
         allowNull: false,
         type: Sequelize.DATE
@@ -29,6 +25,12 @@ module.exports = {
       data_atualizacao: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      acesso: {
+        type: Sequelize.ENUM,
+        values: ['admin', 'cliente'],
+        allowNull: false,
+        defaultValue: 'cliente'
       }
     });
   },

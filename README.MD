@@ -48,6 +48,7 @@ Geralmente o arquivo `{entidade}.schema.js`  é comum entre os escopos, podendo 
 
 * `Swagger` Para documentação da API.
 * `Sequelize` Para conexão com o banco de dados Postgres
+* `hapi-auth-jwt2` Autenticação via token.
 
 #### Qualquer sugestão de melhorias ou PR será bem-vinda.
 

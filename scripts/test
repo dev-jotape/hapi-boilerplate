@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUG" ] || set -x
+
+export NODE_ENV="test"
+
+scripts/bootstrap
+
+echo "===> Running tests..."
+
+if [ -z "$1" ] ; then
+  ./node_modules/.bin/nyc --reporter=html --reporter=text --reporter=lcov ./node_modules/.bin/lab -l -v -M 60000 -m 60000 --pattern 'spec' src/test/index.spec.js src/modules
+else
+  ./node_modules/.bin/lab -l -v -m 60000 -r console -o stdout -r html -o coverage/coverage.html -r lcov -o coverage/lcov.info --pattern 'spec' src/test/index.spec.js src/modules/$1
+fi

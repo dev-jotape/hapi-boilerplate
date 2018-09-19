@@ -1,5 +1,7 @@
 'use strict';
 
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   const Usuario = sequelize.define('Usuario', {
     id: {
@@ -11,12 +13,20 @@ module.exports = (sequelize, DataTypes) => {
     nome: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isUnique: function (value, next) {
+          Usuario.findOne({ where: { email: value }, attributes: ['id'] }).then(function (user) {
+            if (user) { return next('Email já cadastrado'); }
+            next();
+          });
+        }
+      }
     },
     senha: {
       type: DataTypes.VIRTUAL,
       set: function (val) {
-        this.salt = 'ABC';
+        this.salt = bcrypt.genSaltSync(12);
         this.setDataValue('senha', val);
         this.setDataValue('senha_hash', this.criptografarSenha(val));
       }
@@ -26,8 +36,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     salt: {
-      type: DataTypes.STRING(4096),
+      type: DataTypes.VIRTUAL,
       allowNull: false
+    },
+    acesso: {
+      type: DataTypes.ENUM,
+      values: ['admin', 'cliente'],
+      allowNull: false,
+      defaultValue: 'cliente'
     }
   }, {
     tableName: 'usuarios',
@@ -37,9 +53,13 @@ module.exports = (sequelize, DataTypes) => {
     schema: 'public'
   });
 
+  Usuario.prototype.checarSenha = function (senha) {
+    //return this.criptografarSenha(senha) === this.senha_hash;
+    return bcrypt.compareSync(senha, this.senha_hash);
+  };
+
   Usuario.prototype.criptografarSenha = function (senha) {
-    const salt = `ARROZ-${this.salt}-${senha}`;
-    return salt;
+    return bcrypt.hashSync(senha, this.salt);
   };
 
   return Usuario;
